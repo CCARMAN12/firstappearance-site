@@ -1,4 +1,4 @@
-# firstappearance.legal
+# firstappearance.us
 
 The public demo for First Appearance, served as a single static page.
 
