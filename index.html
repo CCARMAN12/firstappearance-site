@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="First Appearance — arrest-record monitoring for Florida criminal defense. See the working software: no sign-up, nothing collected.">
+<style>
+  /* The artifact host supplied these; on our own domain we supply them. */
+  html { color-scheme: light dark; }
+  body { margin:0; }
+  img { max-width:100%; }
+  [hidden] { display:none !important; }
+</style>
+<title>First Appearance Demo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<style>
+  :root {
+    --ground:#F7F8F9; --paper:#FFFFFF; --ink:#131B26; --ink-soft:#33404F;
+    --muted:#5A6474; --faint:#8A93A1; --rule:#DEE2E8; --rule-soft:#EDF0F3;
+    --action:#1F4E5F; --action-ink:#FFFFFF;
+    --stop:#8C2F39; --stop-soft:#F7ECEE;
+    --go:#1F5F3A; --go-soft:#EDF5F0;
+    --warn:#8A5A1F; --warn-soft:#FBF3E6;
+    --band:#131B26; --band-ink:#F2F4F6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#0E141B; --paper:#151D26; --ink:#E7EBF0; --ink-soft:#C4CCD6;
+      --muted:#98A2B0; --faint:#6E7887; --rule:#28323D; --rule-soft:#1E2731;
+      --action:#7FB3C4; --action-ink:#0E141B;
+      --stop:#E09AA4; --stop-soft:#2E1E21;
+      --go:#8FC7A6; --go-soft:#17241C;
+      --warn:#D6A968; --warn-soft:#2A2317;
+      --band:#0A0F15; --band-ink:#F2F4F6;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#0E141B; --paper:#151D26; --ink:#E7EBF0; --ink-soft:#C4CCD6;
+    --muted:#98A2B0; --faint:#6E7887; --rule:#28323D; --rule-soft:#1E2731;
+    --action:#7FB3C4; --action-ink:#0E141B;
+    --stop:#E09AA4; --stop-soft:#2E1E21;
+    --go:#8FC7A6; --go-soft:#17241C;
+    --warn:#D6A968; --warn-soft:#2A2317;
+    --band:#0A0F15; --band-ink:#F2F4F6;
+  }
+
+  *,*::before,*::after { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink);
+         font-family:"IBM Plex Sans",system-ui,sans-serif; font-size:15px;
+         line-height:1.55; -webkit-font-smoothing:antialiased; }
+
+  .band { background:var(--band); color:var(--band-ink); padding:.75rem 1.1rem;
+          text-align:center; font-size:.82rem; letter-spacing:.02em; }
+  .band b { font-weight:600; }
+
+  .wrap { max-width:58rem; margin:0 auto; padding:1.4rem 1.1rem 4rem;
+          display:flex; flex-direction:column; gap:1.2rem; }
+
+  header h1 { font-family:"Newsreader",Georgia,serif; font-size:1.5rem; font-weight:500;
+              margin:0; letter-spacing:-.01em; }
+  header p { color:var(--muted); margin:.25rem 0 0; font-size:.93rem; max-width:60ch; }
+
+  nav { display:flex; gap:.15rem; border-bottom:1px solid var(--rule); overflow-x:auto; }
+  nav button { background:none; border:0; font:inherit; font-size:.9rem; cursor:pointer;
+               padding:.55rem .9rem; color:var(--muted); border-bottom:2px solid transparent;
+               margin-bottom:-1px; white-space:nowrap; }
+  nav button:hover { color:var(--ink); }
+  nav button[aria-selected="true"] { color:var(--action); font-weight:600;
+                                     border-bottom-color:var(--action); }
+
+  .live { background:var(--paper); border:1px solid var(--rule); border-radius:5px;
+          padding:1rem 1.1rem; }
+  .lrow { display:flex; gap:2rem; flex-wrap:wrap; align-items:baseline; }
+  .lrow div { display:flex; flex-direction:column; }
+  .lrow b { font-size:1.5rem; font-weight:600; font-variant-numeric:tabular-nums;
+            line-height:1.15; }
+  .lrow span { font-size:.68rem; text-transform:uppercase; letter-spacing:.07em;
+               color:var(--faint); }
+  .lwhen { margin-left:auto; font-size:.8rem; color:var(--muted); align-self:center; }
+  .lnote { margin:.85rem 0 0; font-size:.84rem; color:var(--muted); max-width:66ch; }
+  .yours { background:var(--paper); border:1px solid var(--rule); border-radius:5px;
+           padding:1rem 1.1rem; display:grid; gap:.75rem 1rem;
+           grid-template-columns:repeat(auto-fit, minmax(11rem, 1fr)); align-items:end; }
+  .yfield { display:flex; flex-direction:column; gap:.25rem; }
+  .yfield label, .ychips legend { font-size:.66rem; text-transform:uppercase;
+           letter-spacing:.09em; color:var(--faint); font-weight:600; }
+  .yfield input { font:inherit; font-size:.92rem; padding:.45rem .6rem;
+           border:1px solid var(--rule); border-radius:4px;
+           background:var(--paper); color:var(--ink); width:100%; }
+  .yfield input:focus { border-color:var(--action); outline:none; }
+  .ychips { border:0; margin:0; padding:0; display:flex; flex-direction:column; gap:.25rem; }
+  .ychips label { display:flex; align-items:center; gap:.4rem; font-size:.88rem;
+           text-transform:none; letter-spacing:0; color:var(--ink); font-weight:400; }
+  .ynote { grid-column:1/-1; margin:0; font-size:.8rem; color:var(--muted); }
+  .card { background:var(--paper); border:1px solid var(--rule); border-radius:5px; }
+  .scroll { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; }
+  th { text-align:left; font-size:.66rem; text-transform:uppercase; letter-spacing:.09em;
+       color:var(--faint); font-weight:600; padding:.6rem .8rem;
+       border-bottom:1px solid var(--rule); white-space:nowrap; }
+  td { padding:.6rem .8rem; border-bottom:1px solid var(--rule-soft); font-size:.9rem;
+       vertical-align:top; }
+  tr:last-child td { border-bottom:0; }
+  .who { font-weight:600; }
+  .sm { font-size:.8rem; color:var(--muted); }
+  .mono { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.8rem;
+          color:var(--muted); font-variant-numeric:tabular-nums; }
+  a.link { color:var(--action); cursor:pointer; text-decoration:underline; }
+
+  .pill { display:inline-block; font-size:.7rem; font-weight:600; padding:.2em .55em;
+          border-radius:3px; }
+  .pill.stop { background:var(--stop-soft); color:var(--stop); }
+  .pill.go { background:var(--go-soft); color:var(--go); }
+
+  .bar { display:flex; gap:.9rem; align-items:center; flex-wrap:wrap;
+         padding:.9rem 1.1rem; border-top:1px solid var(--rule); }
+  button.go { background:var(--action); color:var(--action-ink); border:0; border-radius:4px;
+              font:inherit; font-weight:600; padding:.55rem 1.3rem; cursor:pointer; }
+  button.go:hover { filter:brightness(1.12); }
+  button.go:disabled { background:var(--faint); cursor:not-allowed; }
+  button.ghost { background:none; border:1px solid var(--rule); border-radius:4px;
+                 font:inherit; font-size:.85rem; padding:.4rem .8rem; cursor:pointer;
+                 color:var(--muted); }
+  button.ghost:hover { border-color:var(--action); color:var(--action); }
+  :focus-visible { outline:2px solid var(--action); outline-offset:2px; }
+
+  .notice { padding:.7rem .9rem; border-radius:4px; font-size:.88rem; }
+  .notice.warn { background:var(--warn-soft); color:var(--warn);
+                 border-left:3px solid var(--warn); }
+  .notice.ok { background:var(--go-soft); color:var(--go); border-left:3px solid var(--go); }
+  .empty { padding:2.2rem; text-align:center; color:var(--muted); font-size:.92rem; }
+
+  .stat { display:flex; gap:2rem; flex-wrap:wrap; padding:1rem 1.1rem; }
+  .stat div { display:flex; flex-direction:column; }
+  .stat b { font-size:1.45rem; font-weight:600; font-variant-numeric:tabular-nums; }
+  .stat span { font-size:.68rem; text-transform:uppercase; letter-spacing:.06em;
+               color:var(--faint); }
+
+  /* letter preview */
+  dialog { border:0; border-radius:6px; padding:0; max-width:44rem; width:92vw;
+           background:var(--paper); color:var(--ink); }
+  dialog::backdrop { background:rgba(10,15,21,.55); }
+  .sheet { padding:1.6rem 1.9rem; font-family:"Newsreader",Georgia,serif; font-size:.95rem;
+           line-height:1.5; max-height:74vh; overflow-y:auto; }
+  .sheet .adv { font-family:"IBM Plex Sans",sans-serif; font-size:.7rem; font-weight:600;
+                letter-spacing:.12em; border:1px solid var(--ink); display:inline-block;
+                padding:.2em .5em; margin-bottom:1.1rem; }
+  .sheet h4 { font-family:"IBM Plex Sans",sans-serif; font-size:.64rem; font-weight:600;
+              letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+              margin:1.1rem 0 .25rem; }
+  .sheet .firm { font-weight:500; font-size:1.05rem; }
+  .dlgbar { display:flex; justify-content:space-between; align-items:center;
+            padding:.7rem 1.1rem; border-top:1px solid var(--rule); }
+
+  .cta { background:var(--paper); border:1px solid var(--rule); border-radius:5px;
+         padding:1.3rem 1.4rem; }
+  .cta h2 { font-family:"Newsreader",Georgia,serif; font-weight:500; font-size:1.25rem;
+            margin:0 0 .5rem; }
+  .cta p { margin:0 0 .8rem; max-width:60ch; color:var(--ink-soft); font-size:.95rem; }
+  .cta a.btn { display:inline-block; background:var(--action); color:var(--action-ink);
+               text-decoration:none; font-weight:600; padding:.6rem 1.3rem;
+               border-radius:4px; }
+  .reach { display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+           border:1px solid var(--rule); border-radius:4px; padding:.75rem .95rem;
+           background:var(--ground); }
+  .reach .lbl { font-size:.66rem; text-transform:uppercase; letter-spacing:.09em;
+                color:var(--faint); font-weight:600; }
+  .reach .addr { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:1rem;
+                 font-weight:500; color:var(--action); user-select:all;
+                 text-decoration:none; word-break:break-all; }
+  .copybtn { margin-left:auto; background:var(--action); color:var(--action-ink);
+             border:0; border-radius:4px; font:inherit; font-weight:600;
+             padding:.5rem 1.1rem; cursor:pointer; }
+  .copybtn:hover { filter:brightness(1.12); }
+  footer { color:var(--faint); font-size:.82rem; }
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important;} }
+</style>
+</head>
+<body>
+<div class="band">
+  <b>DEMONSTRATION</b> — real county counts, invented people. Nothing is mailed,
+  there is no sign-up, and nothing you do here is sent anywhere.
+</div>
+
+<div class="wrap">
+  <header>
+    <h1 id="firmName">Gulfview Criminal Defense, P.A.</h1>
+    <p>
+      This is the screen a subscribing firm opens each morning: the Pinellas County
+      booking roster, filtered to DUI and drug possession, with the letters already
+      written. Click anything.
+    </p>
+  </header>
+
+  <section class="live" id="live">
+    <div class="lrow">
+      <div><b id="lBooked">78</b><span>booked</span></div>
+      <div><b id="lMatched">24</b><span>matched this filter</span></div>
+      <div><b id="lRefused">2</b><span>refused</span></div>
+      <div class="lwhen" id="lWhen">Pinellas County · a measured day</div>
+    </div>
+    <p class="lnote">
+      Those counts are real, measured off the county roster. <strong>The ten
+      records below are stand-ins</strong> — invented names at invented addresses.
+      These are public records, but a page anyone can open is not the place to
+      republish someone's arrest. On your own screen you work from the real ones.
+    </p>
+  </section>
+
+  <section class="yours">
+    <div class="yfield">
+      <label for="firmIn">Your firm</label>
+      <input id="firmIn" type="text" placeholder="Morris Law Firm, P.A." autocomplete="off">
+    </div>
+    <div class="yfield">
+      <label for="attyIn">Your name</label>
+      <input id="attyIn" type="text" placeholder="Melinda Morris" autocomplete="off">
+    </div>
+    <div class="yfield">
+      <label for="cityIn">Your city</label>
+      <input id="cityIn" type="text" placeholder="St. Petersburg" autocomplete="off">
+    </div>
+    <fieldset class="ychips">
+      <legend>Charges you take</legend>
+      <label><input type="checkbox" class="cat" value="DUI" checked> DUI</label>
+      <label><input type="checkbox" class="cat" value="Drug possession" checked> Drug possession</label>
+    </fieldset>
+    <p class="ynote">
+      Type and the letters below become yours. Nothing here leaves your browser —
+      there is no server to send it to.
+    </p>
+  </section>
+
+  <nav role="tablist">
+    <button role="tab" data-tab="queue" aria-selected="true">To approve</button>
+    <button role="tab" data-tab="mailed" aria-selected="false">Mailed</button>
+    <button role="tab" data-tab="refused" aria-selected="false">Not mailed</button>
+    <button role="tab" data-tab="postage" aria-selected="false">Postage</button>
+  </nav>
+
+  <div id="panel"></div>
+
+  <section class="cta">
+    <h2>Want it run against your own filters?</h2>
+    <p>
+      Fourteen days on the real Pinellas roster, writing the real letters for your
+      firm. <strong>No credit card, nothing to install, and nothing gets mailed.</strong>
+      It stops by itself on day fourteen.
+    </p>
+    <p>
+      You have given us nothing to follow up with, and that is deliberate — there is
+      no form on this page and no address collected. If you want a trial, you start
+      it; otherwise you will never hear from us.
+    </p>
+    <div class="reach">
+      <div>
+        <div class="lbl">Email</div>
+        <a class="addr" id="mailto" href="mailto:drumstories@gmail.com?subject=First%20Appearance%20trial%20%E2%80%94%20Pinellas">drumstories@gmail.com</a>
+      </div>
+      <button class="copybtn" id="copyEmail" type="button">Copy address</button>
+    </div>
+    <p class="sm" style="margin:.6rem 0 0">
+      Tell us the firm, your Bar number and which charges you take. That is the
+      whole sign-up.
+    </p>
+  </section>
+
+  <footer>
+    First Appearance · arrest-record monitoring for Florida criminal defense ·
+    The counts are measured; the individual records are invented. No real
+    arrestee appears anywhere on this page.
+  </footer>
+</div>
+
+<dialog id="preview">
+  <div class="sheet" id="sheet"></div>
+  <div class="dlgbar">
+    <span class="sm">Exactly as it would be mailed.</span>
+    <button class="ghost" id="closePreview">Close</button>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  const DEFAULTS = {
+    firm: "Gulfview Criminal Defense, P.A.",
+    atty: "Alex Rivera",
+    city: "St. Petersburg",
+  };
+  // What the viewer typed. Held in a variable and nowhere else -- no storage, no
+  // network. "Nothing leaves your browser" has to be true, not just printed.
+  let me = { ...DEFAULTS };
+  let cats = new Set(["DUI", "Drug possession"]);
+  const RATE = 94; // cents per piece, illustrative
+
+  // Invented people. Street names are real, pairings are not.
+  const QUEUE = [
+    ["ALVAREZ, MARCO T", "Clearwater", "1420 Court St", "DUI", "DUI ALCOHOL OR DRUGS 1ST OFF"],
+    ["BRENNAN, KATIE L", "Clearwater", "88 Cleveland St", "Drug possession", "POSSESSION OF CANNABIS UNDER 20 GRAMS"],
+    ["OKONKWO, DANIEL", "St. Petersburg", "310 Central Ave", "DUI", "DRIVING UNDER THE INFLUENCE"],
+    ["PETROV, LENA M", "St. Petersburg", "705 4th St N", "Drug possession", "POSSESSION OF FENTANYL"],
+    ["WHITFIELD, JORDAN", "Clearwater", "2200 Gulf To Bay Blvd", "Drug possession", "POSSESSION OF COCAINE"],
+    ["NAKAMURA, RUTH A", "Dunedin", "612 Main St", "DUI", "DUI WITH PROPERTY DAMAGE"],
+    ["ESPINOZA, CARLOS", "Pinellas Park", "1501 66th St N", "Drug possession", "POSSESSION OF METHAMPHETAMINE"],
+    ["DIALLO, AMINA", "Palm Harbor", "940 Alt 19", "Drug possession", "POSSESSION OF ALPRAZOLAM"],
+  ].map((r, i) => ({ id: i + 1, name: r[0], city: r[1], street: r[2], cat: r[3], charge: r[4] }));
+
+  const REFUSED = [
+    ["HOLLAND, PATRICK J", "—", "DUI ALCOHOL OR DRUGS 2ND OFF",
+     "No usable mailing address on the public record. Nothing was guessed, and " +
+     "motor-vehicle records are federally restricted for this purpose."],
+    ["YOUNG, TAYLOR R", "St. Petersburg", "POSSESSION OF CANNABIS UNDER 20 GRAMS",
+     "Recipient is a minor. Blocked outright — no waiting period cures it."],
+  ].map((r, i) => ({ id: 100 + i, name: r[0], city: r[1], charge: r[2], why: r[3] }));
+
+  const HISTORY = [
+    ["IBRAHIM, NOOR", "Palm Harbor", "Drug possession", "6 Sep"],
+    ["THORNE, WILLIAM J", "Dunedin", "DUI", "5 Sep"],
+    ["REYES, ANGELA", "Pinellas Park", "Drug possession", "5 Sep"],
+    ["MBEKI, JOSHUA", "St. Petersburg", "Drug possession", "4 Sep"],
+    ["CALLAHAN, ROSE M", "Clearwater", "DUI", "4 Sep"],
+  ].map((r, i) => ({ id: 200 + i, name: r[0], city: r[1], cat: r[2], when: r[3] }));
+
+  let queue = QUEUE.slice();
+  let mailed = HISTORY.slice();
+  let picked = new Set();
+  let justSent = 0;
+  let tab = "queue";
+
+  const panel = document.getElementById("panel");
+  const dlg = document.getElementById("preview");
+  const esc = (s) => String(s).replace(/[&<>"']/g,
+    (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+  const money = (c) => "$" + (c / 100).toFixed(2);
+
+  function letterHTML(p) {
+    return `
+      <div class="adv">ADVERTISEMENT</div>
+      <div class="firm">${esc(me.firm)}</div>
+      <div class="sm">150 2nd Ave N, Suite 1200 · ${esc(me.city)}, FL<br>${esc(me.atty)} · FL Bar No. 000000</div>
+      <p style="margin-top:1.2rem">${esc(p.name)}<br>${esc(p.street.toUpperCase())}<br>
+         ${esc(p.city)}, FL</p>
+      <p>Dear ${esc(p.name.split(",")[1] ? p.name.split(",")[1].trim().split(" ")[0] : "Sir")},</p>
+      <p>Public arrest records for Pinellas County indicate you were arrested on
+         6 September 2026. I am a criminal defense attorney licensed in Florida, and I am
+         writing to offer my representation.</p>
+      <p>You are not required to speak with law enforcement about your case without a
+         lawyer present. Deadlines in a criminal case arrive quickly, and decisions made
+         early often shape everything that follows.</p>
+      <p>If you already have a lawyer, please disregard this letter. There is no charge
+         for an initial consultation, and contacting me creates no obligation.</p>
+      <p>Sincerely,<br><br>${esc(me.atty)}<br>${esc(me.firm)}</p>
+      <h4>Office location</h4>
+      <div>My bona fide office is located in ${esc(me.city)}, Florida.</div>
+      <h4>Background, training and experience</h4>
+      <div>Board certified in criminal trial law. Twenty-two years defending DUI and
+           felony drug matters in Pinellas County.</div>
+      <h4>How I obtained your information</h4>
+      <div>I obtained your name and address from publicly available arrest and booking
+           records published by Pinellas County. I did not receive your information from
+           any law enforcement officer, court employee, or other individual.</div>
+      <h4>What I know about your matter</h4>
+      <div>My only knowledge about your matter is your name, your contact information,
+           the date of your arrest, and the charge listed in the public record. I have not
+           reviewed any evidence, report, or file in your case.</div>`;
+  }
+
+  const visible = () => queue.filter((p) => cats.has(p.cat));
+
+  function render() {
+    document.getElementById("firmName").textContent = me.firm;
+    document.querySelectorAll("nav button").forEach(
+      (b) => b.setAttribute("aria-selected", String(b.dataset.tab === tab)));
+
+    if (tab === "queue") {
+      const sent = justSent
+        ? `<div class="notice ok" style="margin-bottom:1rem">${justSent} letter${
+             justSent === 1 ? "" : "s"} sent. They have moved to <strong>Mailed</strong>.</div>` : "";
+      const shown = visible();
+      panel.innerHTML = sent + (shown.length ? `
+        <div class="notice warn" style="margin-bottom:1rem">
+          Postage is billed separately from the subscription. Sending ${shown.length}
+          letter${shown.length === 1 ? "" : "s"} would incur postage for each piece
+          actually mailed.
+        </div>
+        <div class="card"><div class="scroll"><table>
+          <thead><tr>
+            <th><input type="checkbox" id="all" aria-label="Select all"></th>
+            <th>Recipient</th><th>Arrested</th><th>Charge</th><th>Letter</th>
+          </tr></thead>
+          <tbody>${shown.map((p) => `
+            <tr><td><input type="checkbox" class="pick" value="${p.id}" ${
+                  picked.has(p.id) ? "checked" : ""} aria-label="Select ${esc(p.name)}"></td>
+                <td><span class="who">${esc(p.name)}</span><br><span class="sm">${esc(p.city)}</span></td>
+                <td class="mono">2026-09-06</td>
+                <td>${esc(p.cat)}<br><span class="sm">${esc(p.charge)}</span></td>
+                <td><a class="link" data-preview="${p.id}">preview</a></td></tr>`).join("")}
+          </tbody></table></div>
+          <div class="bar">
+            <button class="go" id="send" ${picked.size ? "" : "disabled"}>Send selected</button>
+            <span class="sm">${picked.size} of ${shown.length} selected · approving as ${esc(me.atty)}</span>
+          </div>
+        </div>` : `<div class="card"><div class="empty">Nothing matches the charges you selected.
+           <br><button class="ghost" id="reset" style="margin-top:.9rem">Start the demo again</button></div></div>`);
+
+    } else if (tab === "mailed") {
+      panel.innerHTML = `<div class="card"><div class="scroll"><table>
+        <thead><tr><th>Recipient</th><th>Charge</th><th>Sent</th><th>Approved by</th></tr></thead>
+        <tbody>${mailed.map((p) => `
+          <tr><td><span class="who">${esc(p.name)}</span><br><span class="sm">${esc(p.city)}</span></td>
+              <td>${esc(p.cat)}</td><td class="mono">${esc(p.when)}</td>
+              <td class="sm">${esc(me.atty)}</td></tr>`).join("")}
+        </tbody></table></div></div>
+        <p class="sm" style="margin-top:.7rem">Every piece records who approved it and
+        when. That record is the point of the review step.</p>`;
+
+    } else if (tab === "refused") {
+      panel.innerHTML = `
+        <div class="notice warn" style="margin-bottom:1rem">
+          These were held back on purpose. A letter is only mailed when the
+          jurisdiction's rules are confirmed, the recipient is an adult, and there is a
+          usable address on the public record. Nothing here was guessed at.
+        </div>
+        <div class="card"><div class="scroll"><table>
+          <thead><tr><th>Recipient</th><th>Charge</th><th>Status</th><th>Why it was not mailed</th></tr></thead>
+          <tbody>${REFUSED.map((p) => `
+            <tr><td><span class="who">${esc(p.name)}</span><br><span class="sm">${esc(p.city)}</span></td>
+                <td class="sm">${esc(p.charge)}</td>
+                <td><span class="pill stop">blocked</span></td>
+                <td style="color:var(--stop)">${esc(p.why)}</td></tr>`).join("")}
+          </tbody></table></div></div>
+        <p class="sm" style="margin-top:.7rem">Any vendor can show you a list. The reason
+        to trust one is what it does with the records that should not be mailed — and
+        whether you ever find out about them.</p>`;
+
+    } else {
+      const n = mailed.length;
+      panel.innerHTML = `
+        <div class="card"><div class="stat">
+          <div><b>${n}</b><span>Pieces mailed</span></div>
+          <div><b>${money(RATE)}</b><span>Per piece</span></div>
+          <div><b>${money(n * RATE)}</b><span>September 2026</span></div>
+        </div></div>
+        <div class="notice warn" style="margin-top:1rem">
+          Every figure here is an <strong>estimate</strong> at your configured rate. When
+          the mail vendor reports what it actually charged per piece, those amounts
+          replace the estimates. Nothing on this page is a bill from the vendor.
+        </div>`;
+    }
+  }
+
+  document.querySelector("nav").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-tab]");
+    if (!b) return;
+    tab = b.dataset.tab; justSent = 0; render();
+  });
+
+  panel.addEventListener("change", (e) => {
+    if (e.target.id === "all") {
+      picked = e.target.checked ? new Set(visible().map((p) => p.id)) : new Set();
+      render(); return;
+    }
+    if (e.target.classList.contains("pick")) {
+      const id = Number(e.target.value);
+      e.target.checked ? picked.add(id) : picked.delete(id);
+      render();
+    }
+  });
+
+  panel.addEventListener("click", (e) => {
+    const prev = e.target.closest("[data-preview]");
+    if (prev) {
+      const p = queue.find((x) => x.id === Number(prev.dataset.preview));
+      document.getElementById("sheet").innerHTML = letterHTML(p);
+      dlg.showModal();
+      return;
+    }
+    if (e.target.id === "send") {
+      const going = queue.filter((p) => picked.has(p.id));
+      mailed = going.map((p) => ({ ...p, when: "today" })).concat(mailed);
+      queue = queue.filter((p) => !picked.has(p.id));
+      justSent = going.length; picked = new Set();
+      render(); return;
+    }
+    if (e.target.id === "reset") {
+      queue = QUEUE.slice(); mailed = HISTORY.slice(); picked = new Set();
+      justSent = 0; render();
+    }
+  });
+
+
+  // mailto: is unreliable inside a sandboxed frame -- it can silently do nothing.
+  // Copying the address always works, so that is the primary path and the link
+  // is only a convenience for viewers whose browser does honour it.
+  var copyBtn = document.getElementById("copyEmail");
+  if (copyBtn) copyBtn.addEventListener("click", async function () {
+    try {
+      await navigator.clipboard.writeText("drumstories@gmail.com");
+      copyBtn.textContent = "Copied";
+    } catch (e) {
+      copyBtn.textContent = "Select the address above";
+    }
+    setTimeout(function () { copyBtn.textContent = "Copy address"; }, 1800);
+  });
+
+  const bind = (id, key) => {
+    const el = document.getElementById(id);
+    el.addEventListener("input", () => {
+      me[key] = el.value.trim() || DEFAULTS[key];
+      render();
+    });
+  };
+  bind("firmIn", "firm"); bind("attyIn", "atty"); bind("cityIn", "city");
+
+  document.querySelectorAll(".cat").forEach((box) => {
+    box.addEventListener("change", () => {
+      box.checked ? cats.add(box.value) : cats.delete(box.value);
+      picked = new Set();
+      render();
+    });
+  });
+
+  document.getElementById("closePreview").addEventListener("click", () => dlg.close());
+  render();
+
+  // Live counts, when this page is served somewhere that can fetch them.
+  // Inside the artifact sandbox the request is blocked and we simply keep the
+  // measured figures baked in above -- the page must be correct either way,
+  // never showing a spinner or a zero because a file was unreachable.
+  fetch("stats.json", { cache: "no-store" })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => {
+      if (!d || typeof d.booked !== "number") return;
+      document.getElementById("lBooked").textContent = d.booked;
+      document.getElementById("lMatched").textContent = d.matched;
+      document.getElementById("lRefused").textContent = d.refused;
+      document.getElementById("lWhen").textContent =
+        (d.county || "Pinellas County") + " · roster of " + (d.roster_date || "");
+    })
+    .catch(() => {});
+})();
+</script>
+</body>
+</html>
