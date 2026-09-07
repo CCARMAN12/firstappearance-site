@@ -197,11 +197,12 @@
       <div><b id="lBooked">78</b><span>booked</span></div>
       <div><b id="lMatched">24</b><span>matched this filter</span></div>
       <div><b id="lRefused">2</b><span>refused</span></div>
-      <div class="lwhen" id="lWhen">Pinellas County · a measured day</div>
+      <div class="lwhen" id="lWhen">Pinellas County, Florida</div>
     </div>
     <p class="lnote">
-      Those counts are real, measured off the county roster. <strong>The ten
-      records below are stand-ins</strong> — invented names at invented addresses.
+      Those counts are real, measured off the county roster on
+      <span id="lDate">7 September 2026</span>. <strong>The ten records below are
+      stand-ins</strong> — invented names at invented addresses.
       These are public records, but a page anyone can open is not the place to
       republish someone's arrest. On your own screen you work from the real ones.
     </p>
@@ -538,8 +539,17 @@
       document.getElementById("lBooked").textContent = d.booked;
       document.getElementById("lMatched").textContent = d.matched;
       document.getElementById("lRefused").textContent = d.refused;
-      document.getElementById("lWhen").textContent =
-        (d.county || "Pinellas County") + " · roster of " + (d.roster_date || "");
+      document.getElementById("lWhen").textContent = d.county || "Pinellas County";
+      // The date we READ the roster, not the night the bookings happened --
+      // those are different days, and the payload carries both for that reason.
+      var read = d.run_date || d.roster_date;
+      if (read) {
+        var t = read.split("-");
+        var MONTHS = ["January","February","March","April","May","June","July",
+                      "August","September","October","November","December"];
+        document.getElementById("lDate").textContent =
+          Number(t[2]) + " " + MONTHS[Number(t[1]) - 1] + " " + t[0];
+      }
     })
     .catch(() => {});
 })();
