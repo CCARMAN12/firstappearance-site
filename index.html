@@ -152,6 +152,21 @@
   .dlgbar { display:flex; justify-content:space-between; align-items:center;
             padding:.7rem 1.1rem; border-top:1px solid var(--rule); }
 
+  .price { background:var(--paper); border:1px solid var(--rule); border-radius:5px;
+           padding:1.3rem 1.4rem; }
+  .price h2 { font-family:"Newsreader",Georgia,serif; font-weight:500; font-size:1.25rem;
+              margin:0 0 .9rem; }
+  .plist { list-style:none; margin:0; padding:0; display:grid; gap:.7rem; }
+  .plist li { display:flex; gap:.9rem; align-items:baseline;
+              border-bottom:1px solid var(--rule-soft); padding-bottom:.7rem; }
+  .plist li:last-child { border-bottom:0; padding-bottom:0; }
+  .pamt { font-weight:600; font-variant-numeric:tabular-nums; min-width:9.5rem;
+          font-size:1.02rem; }
+  .pwhat { color:var(--ink-soft); font-size:.93rem; }
+  .pwhat b { font-weight:600; color:var(--ink); }
+  .pbill { margin:1.1rem 0 0; padding:.85rem .95rem; border-radius:4px;
+           background:var(--go-soft); color:var(--go); font-size:.92rem;
+           border-left:3px solid var(--go); }
   .cta { background:var(--paper); border:1px solid var(--rule); border-radius:5px;
          padding:1.3rem 1.4rem; }
   .cta h2 { font-family:"Newsreader",Georgia,serif; font-weight:500; font-size:1.25rem;
@@ -240,6 +255,32 @@
   </nav>
 
   <div id="panel"></div>
+
+  <section class="price">
+    <h2>What it costs</h2>
+    <ul class="plist">
+      <li><span class="pamt">$750 / month</span>
+          <span class="pwhat">Per county. <b>One firm per county, per charge
+          type</b> — your DUI letters are not also going to three other firms
+          down the street.</span></li>
+      <li><span class="pamt">Postage at cost</span>
+          <span class="pwhat">Print and postage passed through at exactly what
+          the vendor charges, itemised on your Postage tab. We do not mark it
+          up. Roughly a dollar a letter, and you approve every one.</span></li>
+      <li><span class="pamt">$150 once</span>
+          <span class="pwhat">The Florida Bar filing fee for your letter
+          template, passed through at cost. Rule 4-7.19 requires it, and it is
+          the Bar's fee, not ours.</span></li>
+      <li><span class="pamt">First 14 days free</span>
+          <span class="pwhat">Real roster, real letters written for your firm,
+          nothing mailed. It stops by itself; there is nothing to
+          cancel.</span></li>
+    </ul>
+    <p class="pbill">
+      <strong>No card, now or later.</strong> Sign up, use it, and we invoice
+      you monthly — net 30, like every other vendor you work with.
+    </p>
+  </section>
 
   <section class="cta">
     <h2>Want it run against your own filters?</h2>
