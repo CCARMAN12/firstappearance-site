@@ -316,6 +316,13 @@
       <label><input type="checkbox" class="cat" value="DUI" checked> DUI</label>
       <label><input type="checkbox" class="cat" value="Drug possession" checked> Drug possession</label>
     </fieldset>
+    <fieldset class="ychips">
+      <legend>Who posts them</legend>
+      <label><input type="radio" name="fulfil" value="service" checked>
+             We mail them</label>
+      <label><input type="radio" name="fulfil" value="self">
+             I print and post them</label>
+    </fieldset>
     <p class="ynote">
       Type and the letters below become yours. Nothing here leaves your browser —
       there is no server to send it to.
@@ -478,6 +485,7 @@
   let picked = new Set();
   let justSent = 0;
   let tab = "queue";
+  let fulfil = "service";
 
   const panel = document.getElementById("panel");
   const dlg = document.getElementById("preview");
@@ -527,14 +535,22 @@
     if (tab === "queue") {
       const sent = justSent
         ? `<div class="notice ok" style="margin-bottom:1rem">${justSent} letter${
-             justSent === 1 ? "" : "s"} sent. They have moved to <strong>Mailed</strong>.</div>` : "";
+             justSent === 1 ? "" : "s"} ${fulfil === "service" ? "sent" : "recorded as posted"
+             }. They have moved to <strong>Mailed</strong>.</div>` : "";
       const shown = visible();
       panel.innerHTML = sent + (shown.length ? `
+        ${fulfil === "service" ? `
         <div class="notice warn" style="margin-bottom:1rem">
           Postage is billed separately from the subscription. Sending ${shown.length}
           letter${shown.length === 1 ? "" : "s"} would incur postage for each piece
           actually mailed.
-        </div>
+        </div>` : `
+        <div class="notice warn" style="margin-bottom:1rem">
+          <strong>You print these, so we bill you no postage at all.</strong>
+          One thing only you can do: Florida requires the word ADVERTISEMENT on the
+          face of the envelope, not just inside the letter. That is why this option
+          exists — a mail vendor's standard envelope cannot carry it.
+        </div>`}
         <div class="card"><div class="scroll"><table>
           <thead><tr>
             <th><input type="checkbox" id="all" aria-label="Select all"></th>
@@ -549,8 +565,10 @@
                 <td><a class="link" data-preview="${p.id}">preview</a></td></tr>`).join("")}
           </tbody></table></div>
           <div class="bar">
-            <button class="go" id="send" ${picked.size ? "" : "disabled"}>Send selected</button>
-            <span class="sm">${picked.size} of ${shown.length} selected · approving as ${esc(me.atty)}</span>
+            <button class="go" id="send" ${picked.size ? "" : "disabled"}>${
+              fulfil === "service" ? "Send selected" : "Mark printed &amp; posted"}</button>
+            <span class="sm">${picked.size} of ${shown.length} selected · ${
+              fulfil === "service" ? "approving as" : "recorded by"} ${esc(me.atty)}</span>
           </div>
         </div>` : `<div class="card"><div class="empty">Nothing matches the charges you selected.
            <br><button class="ghost" id="reset" style="margin-top:.9rem">Start the demo again</button></div></div>`);
@@ -587,7 +605,17 @@
 
     } else {
       const n = mailed.length;
-      panel.innerHTML = `
+      panel.innerHTML = fulfil === "self" ? `
+        <div class="card"><div class="stat">
+          <div><b>${n}</b><span>Pieces posted by you</span></div>
+          <div><b>$0.00</b><span>Per piece</span></div>
+          <div><b>$0.00</b><span>September 2026</span></div>
+        </div></div>
+        <div class="notice ok" style="margin-top:1rem">
+          You print and stamp these, so there is <strong>no postage line on your
+          invoice</strong> — only your subscription. Switch to "We mail them" above
+          and this page starts costing something.
+        </div>` : `
         <div class="card"><div class="stat">
           <div><b>${n}</b><span>Pieces mailed</span></div>
           <div><b>${money(RATE)}</b><span>Per piece</span></div>
@@ -663,6 +691,12 @@
     });
   };
   bind("firmIn", "firm"); bind("attyIn", "atty"); bind("cityIn", "city");
+
+  document.querySelectorAll('input[name="fulfil"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
+      if (radio.checked) { fulfil = radio.value; render(); }
+    });
+  });
 
   document.querySelectorAll(".cat").forEach((box) => {
     box.addEventListener("change", () => {
