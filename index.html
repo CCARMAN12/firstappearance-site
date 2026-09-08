@@ -180,6 +180,19 @@
           font-size:1.02rem; }
   .pwhat { color:var(--ink-soft); font-size:.93rem; }
   .pwhat b { font-weight:600; color:var(--ink); }
+  .tiers { display:grid; gap:.7rem; grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));
+           margin:0 0 1.3rem; }
+  .tier { border:1px solid var(--rule); border-radius:4px; padding:.85rem .9rem;
+          background:var(--ground); }
+  .tname { font-size:.66rem; text-transform:uppercase; letter-spacing:.09em;
+           color:var(--faint); font-weight:600; }
+  .tamt { font-family:"Newsreader",Georgia,serif; font-size:1.7rem; font-weight:500;
+          line-height:1.2; margin:.15rem 0 0; font-variant-numeric:tabular-nums; }
+  .tamt span { font-family:"IBM Plex Sans",sans-serif; font-size:.8rem;
+               font-weight:400; color:var(--muted); }
+  .tinc { font-size:.84rem; color:var(--ink-soft); font-weight:600; }
+  .tier p { margin:.4rem 0 0; font-size:.82rem; color:var(--muted); }
+  .pfoot { margin:.9rem 0 0; font-size:.84rem; color:var(--muted); max-width:66ch; }
   .pbill { margin:1.1rem 0 0; padding:.85rem .95rem; border-radius:4px;
            background:var(--go-soft); color:var(--go); font-size:.92rem;
            border-left:3px solid var(--go); }
@@ -320,27 +333,58 @@
 
   <section class="price">
     <h2>What it costs</h2>
+
+    <div class="tiers">
+      <div class="tier">
+        <div class="tname">Solo</div>
+        <div class="tamt">$199<span>/month</span></div>
+        <div class="tinc">up to 100 letters</div>
+        <p>One charge type. A DUI-only practice in Pinellas sits here.</p>
+      </div>
+      <div class="tier">
+        <div class="tname">Practice</div>
+        <div class="tamt">$399<span>/month</span></div>
+        <div class="tinc">up to 350 letters</div>
+        <p>Two or three charge types, or a wider filter on one.</p>
+      </div>
+      <div class="tier">
+        <div class="tname">County</div>
+        <div class="tamt">$699<span>/month</span></div>
+        <div class="tinc">no cap, one county</div>
+        <p>Every matching booking in the county, however many that turns out
+        to be.</p>
+      </div>
+    </div>
+
     <ul class="plist">
-      <li><span class="pamt">$750 / month</span>
-          <span class="pwhat">Per county. <b>One firm per county, per charge
-          type</b> — your DUI letters are not also going to three other firms
-          down the street.</span></li>
+      <li><span class="pamt">Your leads only</span>
+          <span class="pwhat"><b>One firm per county, per charge type.</b> Your
+          DUI letters are not also going to three other firms down the
+          street.</span></li>
       <li><span class="pamt">Postage at cost</span>
-          <span class="pwhat">Print and postage passed through at exactly what
-          the vendor charges, itemised on your Postage tab. We do not mark it
-          up. Roughly a dollar a letter, and you approve every one.</span></li>
+          <span class="pwhat">Passed through at exactly what the mail vendor
+          charges, itemised, never marked up — roughly a dollar a letter.
+          <b>Print them on your own printer and you pay us no postage at
+          all.</b></span></li>
       <li><span class="pamt">$150 once</span>
           <span class="pwhat">The Florida Bar filing fee for your letter
-          template, passed through at cost. Rule 4-7.19 requires it, and it is
-          the Bar's fee, not ours.</span></li>
+          template. Rule 4-7.19 requires it, and it is the Bar's fee, not
+          ours.</span></li>
       <li><span class="pamt">First 14 days free</span>
           <span class="pwhat">Real roster, real letters written for your firm,
           nothing mailed. It stops by itself; there is nothing to
           cancel.</span></li>
     </ul>
+
     <p class="pbill">
       <strong>No card, now or later.</strong> Sign up, use it, and we invoice
       you monthly — net 30, like every other vendor you work with.
+    </p>
+    <p class="pfoot">
+      We do not charge per letter. A letter we hold back — a minor, no usable
+      address, a jurisdiction you have not confirmed — costs you nothing and
+      earns us nothing. That is deliberate: a company paid by the letter has a
+      reason to send one, and we would rather not have that reason.
     </p>
   </section>
 
