@@ -188,6 +188,40 @@
              padding:.5rem 1.1rem; cursor:pointer; }
   .copybtn:hover { filter:brightness(1.12); }
   footer { color:var(--faint); font-size:.82rem; }
+  /* ---- phones ----------------------------------------------------------
+     The QR code on a printed letter is scanned on a phone, so this is the
+     primary experience for that channel, not a courtesy. A five-column table
+     is 469px wide inside a 338px box: it technically scrolled, but the
+     preview link -- the whole point of the page -- sat off the right edge
+     where nobody would ever swipe to find it.
+
+     Rows become stacked blocks. No horizontal scrolling, nothing hidden, and
+     the checkboxes go from 13px to 24px, since 13px is not a target a thumb
+     can hit. Deliberately generic across all four tabs rather than keyed to
+     column positions, which differ per table and would silently misorder the
+     others. */
+  @media (max-width: 640px) {
+    .scroll { overflow-x: visible; }
+    thead { display: none; }
+    table, tbody, tr, td { display: block; width: 100%; }
+    tr { border-bottom: 1px solid var(--rule); padding: .85rem .9rem; }
+    tr:last-child { border-bottom: 0; }
+    td { border: 0; padding: .13rem 0; }
+    td:has(input[type="checkbox"]) { padding-bottom: .5rem; }
+    input[type="checkbox"] { width: 24px; height: 24px; }
+    a.link { display: inline-block; padding: .5rem 0; font-size: .95rem; }
+
+    .lwhen { margin-left: 0; width: 100%; }
+    .lrow { gap: 1.4rem 2rem; }
+    .bar { padding: .9rem; }
+    button.go { width: 100%; padding: .7rem 1rem; }
+    .plist li { flex-direction: column; gap: .2rem; }
+    .pamt { min-width: 0; }
+    .reach { align-items: stretch; }
+    .copybtn { margin-left: 0; width: 100%; }
+    .sheet { padding: 1.1rem 1.2rem; }
+  }
+
   @media (prefers-reduced-motion:reduce){ *{transition:none!important;} }
 </style>
 </head>
