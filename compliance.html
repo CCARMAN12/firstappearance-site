@@ -82,6 +82,13 @@
             display:flex; align-items:center; justify-content:center; }
   ol.q b { display:block; font-weight:600; }
 
+  .frame { background:var(--paper); border:1px solid var(--rule);
+           border-left:3px solid var(--action); border-radius:4px;
+           padding:.9rem 1.05rem; margin:0 0 1.6rem; max-width:66ch;
+           font-size:.95rem; }
+  a.fn { font-size:.7em; vertical-align:super; text-decoration:none;
+         color:var(--action); font-weight:600; margin-left:.15em; }
+  .fnote { font-size:.86rem; color:var(--muted); max-width:66ch; }
   footer { border-top:1px solid var(--rule); margin-top:2.5rem; padding-top:1rem;
            color:var(--faint); font-size:.82rem; }
   footer a { color:var(--muted); }
@@ -113,14 +120,12 @@
   rather than take our word.
 </p>
 
-<div class="note warn">
-  <strong>This is not legal advice, and we are not your lawyers.</strong>
-  We are a software company. What follows describes the rules our software was
-  built to, and our reading of them as of the dates given. You remain responsible
-  for your own advertising compliance, and you should confirm all of it with your
-  own counsel or with The Florida Bar. Where we are unsure, we say so below
-  rather than leaving it out.
-</div>
+<p class="frame">
+  Everything below describes <strong>our own software</strong> — the rules we
+  identified when building it, what it does to obey them, and where it refuses
+  outright. It is a record of what we built to, not guidance for your
+  practice.<a href="#note" id="noteref" class="fn">1</a>
+</p>
 
 <h2>What the software will not mail</h2>
 <p>
@@ -280,10 +285,23 @@ inside the letter.</p>
   written to.
 </p>
 
+<h2 id="note">Note</h2>
+<p class="fnote">
+  <sup>1</sup> First Appearance is a software company, not a law firm, and no
+  one here is a member of The Florida Bar. This page records the rules we
+  identified and built the program to obey, and our reading of them on the dates
+  shown. It is not legal advice, it is not a legal opinion, and it must not be
+  relied on in place of your own judgment or your own counsel's. Rules are
+  amended; check the current text. Responsibility for your firm's advertising
+  compliance is yours and cannot be delegated to a vendor — which is why the
+  software refuses to mail from any jurisdiction until you have personally
+  confirmed its rules, rather than accepting ours.
+</p>
+
 <footer>
   First Appearance · P.O. Box 5806, Spring Hill, FL 34611 · 727-265-1094 ·
   <a href="mailto:craig@firstappearance.us">craig@firstappearance.us</a><br>
-  Last reviewed 8 September 2026. Nothing on this page is legal advice.
+  Last reviewed 8 September 2026. See the <a href="#note">note</a> above.
 </footer>
 
 </div>
