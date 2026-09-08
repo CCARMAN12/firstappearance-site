@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#1F4E5F">
 <meta name="description" content="First Appearance — arrest-record monitoring for Florida criminal defense. See the working software: no sign-up, nothing collected.">
 <style>
   /* The artifact host supplied these; on our own domain we supply them. */
@@ -48,6 +51,19 @@
   body { margin:0; background:var(--ground); color:var(--ink);
          font-family:"IBM Plex Sans",system-ui,sans-serif; font-size:15px;
          line-height:1.55; -webkit-font-smoothing:antialiased; }
+
+  /* The largest text on this page is the DEMO firm's name, which is the point --
+     it is their screen. But that left nothing saying whose software it is, so a
+     visitor's first impression was somebody else's letterhead. Slim on purpose:
+     the promise band underneath is what earns the scan, and pushing it down the
+     page to make room for a logo would be the wrong trade. */
+  .mast { display:flex; align-items:center; gap:.6rem; background:var(--paper);
+          border-bottom:1px solid var(--rule); padding:.6rem 1.1rem; }
+  .mast svg { color:var(--action); width:22px; height:22px; flex:none; display:block; }
+  .mast .name { font-family:"Newsreader",Georgia,serif; font-size:1.05rem;
+                font-weight:500; letter-spacing:.005em; color:var(--ink); }
+  .mast .what { margin-left:auto; font-size:.78rem; color:var(--faint); }
+  @media (max-width:640px) { .mast .what { display:none; } }
 
   .band { background:var(--band); color:var(--band-ink); padding:.75rem 1.1rem;
           text-align:center; font-size:.82rem; letter-spacing:.02em; }
@@ -226,6 +242,17 @@
 </style>
 </head>
 <body>
+<header class="mast">
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <rect x="7.5" y="11" width="17" height="11.5" rx="1" fill="none"
+          stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+    <path d="M9 12.2 16 17.6l7-5.4" fill="none" stroke="currentColor"
+          stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span class="name">First Appearance</span>
+  <span class="what">Arrest-record monitoring for Florida criminal defense</span>
+</header>
+
 <div class="band">
   <b>NO SIGN-UP.</b> No email, no name, nothing collected — and nothing you do
   here is sent anywhere. Nothing is mailed to anyone.
