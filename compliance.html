@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="What First Appearance refuses to mail, and the Florida Bar rules it refuses under. Including the questions we have not yet had answered.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#1F4E5F">
+<title>Compliance — First Appearance</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<style>
+  :root {
+    --ground:#F7F8F9; --paper:#FFFFFF; --ink:#131B26; --ink-soft:#33404F;
+    --muted:#5A6474; --faint:#8A93A1; --rule:#DEE2E8; --rule-soft:#EDF0F3;
+    --action:#1F4E5F; --stop:#8C2F39; --stop-soft:#F7ECEE;
+    --warn:#8A5A1F; --warn-soft:#FBF3E6; --go:#1F5F3A; --go-soft:#EDF5F0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#0E141B; --paper:#151D26; --ink:#E7EBF0; --ink-soft:#C4CCD6;
+      --muted:#98A2B0; --faint:#6E7887; --rule:#28323D; --rule-soft:#1E2731;
+      --action:#7FB3C4; --stop:#E09AA4; --stop-soft:#2E1E21;
+      --warn:#D6A968; --warn-soft:#2A2317; --go:#8FC7A6; --go-soft:#17241C;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#0E141B; --paper:#151D26; --ink:#E7EBF0; --ink-soft:#C4CCD6;
+    --muted:#98A2B0; --faint:#6E7887; --rule:#28323D; --rule-soft:#1E2731;
+    --action:#7FB3C4; --stop:#E09AA4; --stop-soft:#2E1E21;
+    --warn:#D6A968; --warn-soft:#2A2317; --go:#8FC7A6; --go-soft:#17241C;
+  }
+  *,*::before,*::after { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink);
+         font-family:"IBM Plex Sans",system-ui,sans-serif; font-size:15px;
+         line-height:1.6; -webkit-font-smoothing:antialiased; }
+
+  .mast { display:flex; align-items:center; gap:.6rem; background:var(--paper);
+          border-bottom:1px solid var(--rule); padding:.6rem 1.1rem; }
+  .mast svg { color:var(--action); width:22px; height:22px; flex:none; display:block; }
+  .mast .name { font-family:"Newsreader",Georgia,serif; font-size:1.05rem;
+                font-weight:500; color:var(--ink); text-decoration:none; }
+  .mast .links { margin-left:auto; display:flex; gap:1rem; font-size:.85rem; }
+  .mast .links a { color:var(--muted); text-decoration:none; }
+  .mast .links a.on { color:var(--action); font-weight:600; }
+  .mast .links a:hover { color:var(--ink); }
+
+  .wrap { max-width:46rem; margin:0 auto; padding:2rem 1.1rem 4rem; }
+  h1 { font-family:"Newsreader",Georgia,serif; font-size:1.7rem; font-weight:500;
+       margin:0 0 .3rem; letter-spacing:-.01em; }
+  .lede { color:var(--muted); margin:0 0 1.6rem; font-size:1rem; max-width:60ch; }
+  h2 { font-family:"Newsreader",Georgia,serif; font-size:1.2rem; font-weight:500;
+       margin:2.2rem 0 .6rem; padding-top:1.2rem; border-top:1px solid var(--rule); }
+  h3 { font-size:.72rem; text-transform:uppercase; letter-spacing:.09em;
+       color:var(--faint); font-weight:600; margin:1.4rem 0 .35rem; }
+  p { margin:0 0 .85rem; max-width:66ch; }
+  .cite { font-size:.85rem; color:var(--muted); }
+  code { font-family:ui-monospace,SFMono-Regular,monospace; font-size:.88em;
+         background:var(--rule-soft); padding:.1em .35em; border-radius:3px; }
+
+  .note { padding:.85rem 1rem; border-radius:4px; font-size:.92rem; margin:1.1rem 0;
+          max-width:66ch; }
+  .note.warn { background:var(--warn-soft); color:var(--warn); border-left:3px solid var(--warn); }
+  .note.stop { background:var(--stop-soft); color:var(--stop); border-left:3px solid var(--stop); }
+  .note.ok   { background:var(--go-soft);   color:var(--go);   border-left:3px solid var(--go); }
+
+  table { width:100%; border-collapse:collapse; margin:.8rem 0 1.2rem;
+          background:var(--paper); border:1px solid var(--rule); border-radius:4px; }
+  th { text-align:left; font-size:.68rem; text-transform:uppercase; letter-spacing:.08em;
+       color:var(--faint); font-weight:600; padding:.6rem .8rem;
+       border-bottom:1px solid var(--rule); }
+  td { padding:.6rem .8rem; border-bottom:1px solid var(--rule-soft);
+       font-size:.92rem; vertical-align:top; }
+  tr:last-child td { border-bottom:0; }
+
+  ol.q { counter-reset:q; list-style:none; padding:0; margin:.6rem 0 0; }
+  ol.q li { counter-increment:q; position:relative; padding-left:2.2rem;
+            margin-bottom:.9rem; max-width:66ch; }
+  ol.q li::before { content:counter(q); position:absolute; left:0; top:.05rem;
+            width:1.5rem; height:1.5rem; border-radius:50%; background:var(--rule-soft);
+            color:var(--muted); font-size:.78rem; font-weight:600;
+            display:flex; align-items:center; justify-content:center; }
+  ol.q b { display:block; font-weight:600; }
+
+  footer { border-top:1px solid var(--rule); margin-top:2.5rem; padding-top:1rem;
+           color:var(--faint); font-size:.82rem; }
+  footer a { color:var(--muted); }
+  @media (max-width:640px) { .mast .links { gap:.7rem; font-size:.8rem; } }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <rect x="7.5" y="11" width="17" height="11.5" rx="1" fill="none"
+          stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+    <path d="M9 12.2 16 17.6l7-5.4" fill="none" stroke="currentColor"
+          stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <a class="name" href="/">First Appearance</a>
+  <span class="links">
+    <a href="/">Demo</a>
+    <a href="/compliance.html" class="on">Compliance</a>
+  </span>
+</header>
+
+<div class="wrap">
+
+<h1>What we refuse, and the rule we refuse under</h1>
+<p class="lede">
+  Every vendor in this market says they are compliant. This page says what that
+  means in our software, line by line, with the rule beside it — so you can check
+  rather than take our word.
+</p>
+
+<div class="note warn">
+  <strong>This is not legal advice, and we are not your lawyers.</strong>
+  We are a software company. What follows describes the rules our software was
+  built to, and our reading of them as of the dates given. You remain responsible
+  for your own advertising compliance, and you should confirm all of it with your
+  own counsel or with The Florida Bar. Where we are unsure, we say so below
+  rather than leaving it out.
+</div>
+
+<h2>What the software will not mail</h2>
+<p>
+  These are refusals, not warnings. The letter is never produced, and the reason
+  is recorded where you can read it — the <em>Not mailed</em> page in your account
+  exists for exactly this.
+</p>
+
+<table>
+  <thead><tr><th>The software refuses when</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>The public record shows no mailing address</strong></td>
+      <td>Nothing is guessed or purchased. Motor-vehicle records are federally
+          restricted for marketing use under the Driver's Privacy Protection Act,
+          and a broker-appended address would make the required
+          how-I-obtained-your-information statement untrue.</td>
+    </tr>
+    <tr>
+      <td><strong>The person is a minor</strong></td>
+      <td>Blocked outright. No waiting period or disclosure cures it.</td>
+    </tr>
+    <tr>
+      <td><strong>The jurisdiction's rules are not confirmed by you</strong></td>
+      <td>Every jurisdiction ships unconfirmed. Nothing mails from it until the
+          subscribing attorney personally marks it verified. This is the default,
+          not a setting we hope you find.</td>
+    </tr>
+    <tr>
+      <td><strong>There is no arrest date, or the charge text is missing</strong></td>
+      <td>The disclosures require both. An incomplete record produces a hold,
+          not a best guess.</td>
+    </tr>
+    <tr>
+      <td><strong>Another firm already has that arrest</strong></td>
+      <td>One arrest produces one letter across every firm we work with, so no
+          arrested person receives two. See <em>exclusivity</em> below.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="note stop">
+  <strong>Florida does not currently mail at all in our software.</strong>
+  We have researched the rules but have not had them confirmed by Bar counsel, so
+  Florida is marked <em>researched</em> rather than <em>verified</em> and the gate
+  refuses every Florida letter. Only a subscribing attorney can change that, for
+  their own account. We would rather ship a product that mails nothing than one
+  that mails on our assumption about someone else's licence.
+</div>
+
+<h2>What Florida requires in the letter</h2>
+<p class="cite">
+  Our reading of Rule 4-7.18, Rules Regulating The Florida Bar. Researched
+  29 August 2026; reviewed 8 September 2026. Verify against the current rule.
+</p>
+
+<p>
+  Our template carries all of the following, and the test suite fails if any of
+  them goes missing:
+</p>
+
+<h3>On the envelope and every enclosure</h3>
+<p>The word <code>ADVERTISEMENT</code>, on the face of the envelope — not only
+inside the letter.</p>
+
+<h3>In the body</h3>
+<p>
+  Your background, training and experience, in your own words. Your bona fide
+  office location. A statement of how the information was obtained. And a
+  limits-of-knowledge statement naming what we actually know: the recipient's
+  name, contact details, arrest date and the charge listed in the public record —
+  and nothing else.
+</p>
+
+<h3>Filing</h3>
+<p>
+  Rule 4-7.19 requires each advertisement to be filed with the Bar —
+  <strong>$150 if timely, $250 if late</strong>, and our reading is that this is
+  per template rather than per mailing. Any wording change to a template means a
+  new filing before it is used, which is why we do not let template text be
+  edited casually.
+</p>
+
+<div class="note ok">
+  <strong>There is no thirty-day waiting period for criminal matters.</strong>
+  The thirty-day restriction in Rule 4-7.18(b)(1)(A) applies to communications
+  concerning personal injury, wrongful death, and accident or disaster. Our
+  reading is that it does not reach criminal defence, which is why letters can go
+  out the morning after a booking. This is one of the questions we have put to Bar
+  counsel in writing, and we will publish the answer here.
+</div>
+
+<h2>Exclusivity, and why it is a compliance matter</h2>
+<p>
+  One firm in a county receives the DUI letters; another receives drug possession;
+  a third domestic violence. One arrest produces one letter across every firm we
+  work with, decided by the lead charge and enforced before anything is printed.
+</p>
+<p>
+  This is usually described as a commercial promise, but the reason it exists is
+  simpler. A person arrested on a Friday night who receives four nearly identical
+  solicitation letters on the same morning has been treated badly, and every firm
+  that sent one looks worse for it.
+</p>
+
+<h2>What we have <em>not</em> confirmed</h2>
+<p>
+  These are open questions we have put in writing to The Florida Bar's Ethics and
+  Advertising Department. We publish them because a company that only lists what
+  it is sure of is telling you half of what it knows.
+</p>
+
+<ol class="q">
+  <li><b>Whether any waiting period applies to criminal solicitation.</b>
+      Our reading is that the thirty-day rule is personal-injury only. We have
+      asked for that to be confirmed.</li>
+  <li><b>Whether a window envelope can satisfy the envelope marking.</b>
+      Standard mail-vendor envelopes cannot be pre-printed, and a custom envelope
+      carries cost and lead time. Until this is settled, Florida service mail is
+      refused and firms print their own.</li>
+  <li><b>Whether our intended disclosures are complete.</b>
+      We have listed exactly what the template contains and asked whether anything
+      is missing.</li>
+  <li><b>How the source of the information should be described.</b>
+      We have proposed our wording and asked whether it suffices.</li>
+  <li><b>What triggers a new filing.</b>
+      Whether a change of envelope, or of contact details, or a logo — with no
+      change to the substantive text — makes it a new advertisement.</li>
+  <li><b>What diligence is expected regarding represented persons.</b>
+      Booking records do not reliably show whether someone has already retained
+      counsel or been appointed a public defender.</li>
+  <li><b>Whether a client's identity may be confirmed to a vendor.</b>
+      We would like to measure how many recipients became clients. We have asked
+      whether that is permissible at all, and whether an aggregate count without
+      names would be.</li>
+  <li><b>Whether Bar-member access to a restricted records portal may be used
+      this way</b>, and whether a software provider may operate it under
+      supervision.</li>
+</ol>
+
+<div class="note warn">
+  We will publish the answers here as they arrive, including any that go against
+  us. If an answer means a feature has to change or be withdrawn, that will be
+  said on this page.
+</div>
+
+<h2>Where our data comes from</h2>
+<p>
+  Publicly published county booking rosters, read on the terms the publishing
+  agency sets. We review each county's <code>robots.txt</code> and terms of use
+  before a source is enabled, and a county whose terms prohibit redistributing
+  the data is not used — we have already ruled counties out on that basis alone.
+</p>
+<p>
+  We do not buy address data from brokers, and we do not use motor-vehicle
+  records. If a roster does not publish a mailing address, that person is not
+  written to.
+</p>
+
+<footer>
+  First Appearance · P.O. Box 5806, Spring Hill, FL 34611 · 727-265-1094 ·
+  <a href="mailto:craig@firstappearance.us">craig@firstappearance.us</a><br>
+  Last reviewed 8 September 2026. Nothing on this page is legal advice.
+</footer>
+
+</div>
+</body>
+</html>

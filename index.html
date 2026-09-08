@@ -63,6 +63,10 @@
   .mast .name { font-family:"Newsreader",Georgia,serif; font-size:1.05rem;
                 font-weight:500; letter-spacing:.005em; color:var(--ink); }
   .mast .what { margin-left:auto; font-size:.78rem; color:var(--faint); }
+  .mast .links { margin-left:auto; display:flex; gap:1rem; font-size:.85rem; }
+  .mast .links a { color:var(--muted); text-decoration:none; }
+  .mast .links a.on { color:var(--action); font-weight:600; }
+  .mast .links a:hover { color:var(--ink); }
   @media (max-width:640px) { .mast .what { display:none; } }
 
   .band { background:var(--band); color:var(--band-ink); padding:.75rem 1.1rem;
@@ -263,7 +267,7 @@
           stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
   <span class="name">First Appearance</span>
-  <span class="what">Arrest-record monitoring for Florida criminal defense</span>
+  <span class="links"><a href="/" class="on">Demo</a><a href="/compliance.html">Compliance</a></span>
 </header>
 
 <div class="band">
