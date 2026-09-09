@@ -278,6 +278,26 @@
     .sheet { padding: 1.1rem 1.2rem; }
   }
 
+  /* The sticky phone bar. Display:none at desktop widths so it can never
+     appear there, and hidden until script says otherwise so a reader with
+     JavaScript off gets the two real buttons and no floating furniture. */
+  .stickycta { display:none; }
+  @media (max-width: 640px) {
+    .stickycta {
+      display:block; position:fixed; left:0; right:0; bottom:0; z-index:40;
+      background:var(--paper); border-top:1px solid var(--rule);
+      padding:.6rem .9rem calc(.6rem + env(safe-area-inset-bottom));
+      box-shadow:0 -2px 10px rgba(0,0,0,.10);
+      transform:translateY(115%); transition:transform .22s ease;
+    }
+    .stickycta[data-show="1"] { transform:translateY(0); }
+    .stickycta a.claim { width:100%; text-align:center; padding:.8rem 1rem;
+                         font-size:1rem; }
+    .stickycta .terms { display:block; text-align:center; font-size:.74rem;
+                        color:var(--muted); margin:.4rem 0 0; }
+    /* Room for the bar, so it never sits on top of the footer text. */
+    body { padding-bottom:5.5rem; }
+  }
   @media (prefers-reduced-motion:reduce){ *{transition:none!important;} }
 </style>
 </head>
@@ -779,6 +799,35 @@
       }
     })
     .catch(() => {});
+})();
+</script>
+<div class="stickycta" id="stickyCta" aria-hidden="true">
+  <a class="claim" href="mailto:craig@firstappearance.us?subject=Claiming%20a%20Pinellas%20charge%20type&body=Firm%3A%0ABar%20number%3A%0ACharges%20I%20want%3A%0A%0A(DUI%2C%20drug%20possession%2C%20domestic%20violence%20%E2%80%94%20whichever%20is%20still%20open.)%0A">Claim your charge type</a>
+  <span class="terms">Five firms in Pinellas. One per charge type. Nothing taken yet.</span>
+</div>
+
+<script>
+/* Show the sticky bar only while neither real button is on screen.
+   Two of the same red button visible at once reads as a page nagging you,
+   and the closing section is where the terms are -- the bar exists to carry
+   someone who is deep in the roster back to it, not to compete with it. */
+(function () {
+  var bar = document.getElementById("stickyCta");
+  var anchors = Array.prototype.slice.call(
+    document.querySelectorAll(".herocta a.claim, .claimrow a.claim"));
+  if (!bar || !anchors.length || !("IntersectionObserver" in window)) return;
+
+  var onScreen = new WeakSet();
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { onScreen.add(e.target); } else { onScreen.delete(e.target); }
+    });
+    var anyVisible = anchors.some(function (a) { return onScreen.has(a); });
+    bar.dataset.show = anyVisible ? "0" : "1";
+    bar.setAttribute("aria-hidden", anyVisible ? "true" : "false");
+  }, { rootMargin: "0px 0px -8% 0px" });
+
+  anchors.forEach(function (a) { observer.observe(a); });
 })();
 </script>
 </body>
