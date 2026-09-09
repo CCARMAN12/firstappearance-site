@@ -21,6 +21,7 @@
     --ground:#F7F8F9; --paper:#FFFFFF; --ink:#131B26; --ink-soft:#33404F;
     --muted:#5A6474; --faint:#8A93A1; --rule:#DEE2E8; --rule-soft:#EDF0F3;
     --action:#1F4E5F; --action-ink:#FFFFFF;
+    --urgent:#C0262F; --urgent-ink:#FFFFFF;
     --stop:#8C2F39; --stop-soft:#F7ECEE;
     --go:#1F5F3A; --go-soft:#EDF5F0;
     --warn:#8A5A1F; --warn-soft:#FBF3E6;
@@ -31,6 +32,7 @@
       --ground:#0E141B; --paper:#151D26; --ink:#E7EBF0; --ink-soft:#C4CCD6;
       --muted:#98A2B0; --faint:#6E7887; --rule:#28323D; --rule-soft:#1E2731;
       --action:#7FB3C4; --action-ink:#0E141B;
+      --urgent:#D6303B; --urgent-ink:#FFFFFF;
       --stop:#E09AA4; --stop-soft:#2E1E21;
       --go:#8FC7A6; --go-soft:#17241C;
       --warn:#D6A968; --warn-soft:#2A2317;
@@ -41,6 +43,7 @@
     --ground:#0E141B; --paper:#151D26; --ink:#E7EBF0; --ink-soft:#C4CCD6;
     --muted:#98A2B0; --faint:#6E7887; --rule:#28323D; --rule-soft:#1E2731;
     --action:#7FB3C4; --action-ink:#0E141B;
+    --urgent:#D6303B; --urgent-ink:#FFFFFF;
     --stop:#E09AA4; --stop-soft:#2E1E21;
     --go:#8FC7A6; --go-soft:#17241C;
     --warn:#D6A968; --warn-soft:#2A2317;
@@ -209,6 +212,23 @@
   .cta a.btn { display:inline-block; background:var(--action); color:var(--action-ink);
                text-decoration:none; font-weight:600; padding:.6rem 1.3rem;
                border-radius:4px; }
+  a.claim { display:inline-block; background:var(--urgent); color:var(--urgent-ink);
+             text-decoration:none; font-weight:700; font-size:1.05rem;
+             padding:.78rem 1.5rem; border-radius:4px; letter-spacing:.01em;
+             box-shadow:0 1px 0 rgba(0,0,0,.18); }
+  a.claim:hover { filter:brightness(1.08); }
+  a.claim:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  .claimrow { display:flex; align-items:center; gap:.9rem 1.1rem; flex-wrap:wrap;
+              margin:0 0 .75rem; }
+  .claimrow .left { font-size:.86rem; color:var(--muted); }
+  .scarce { border-left:3px solid var(--urgent); padding:.1rem 0 .1rem .75rem;
+            margin:0 0 .95rem; }
+  .scarce b { color:var(--ink); }
+  .scarce span { display:block; font-size:.88rem; color:var(--muted);
+                 margin-top:.15rem; }
+  .herocta { margin:.9rem 0 0; display:flex; align-items:center;
+             gap:.8rem 1rem; flex-wrap:wrap; }
+  .herocta .note { font-size:.84rem; color:var(--muted); max-width:44ch; }
   .reach { display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
            border:1px solid var(--rule); border-radius:4px; padding:.75rem .95rem;
            background:var(--ground); }
@@ -253,6 +273,8 @@
     .pamt { min-width: 0; }
     .reach { align-items: stretch; }
     .copybtn { margin-left: 0; width: 100%; }
+    a.claim { width: 100%; text-align: center; padding: .85rem 1rem; }
+    .claimrow, .herocta { gap: .6rem; }
     .sheet { padding: 1.1rem 1.2rem; }
   }
 
@@ -285,6 +307,11 @@
       booking roster, filtered to DUI and drug possession, with the letters already
       written. Click anything.
     </p>
+    <div class="herocta">
+      <a class="claim" href="mailto:craig@firstappearance.us?subject=Claiming%20a%20Pinellas%20charge%20type&body=Firm%3A%0ABar%20number%3A%0ACharges%20I%20want%3A%0A%0A(DUI%2C%20drug%20possession%2C%20domestic%20violence%20%E2%80%94%20whichever%20is%20still%20open.)%0A">Claim your charge type</a>
+      <span class="note">Five firms in Pinellas, one per charge type.
+      Nothing is taken yet.</span>
+    </div>
   </header>
 
   <section class="live" id="live">
@@ -402,7 +429,19 @@
   </section>
 
   <section class="cta">
-    <h2>Want it run against your own filters?</h2>
+    <h2>Claim a charge type before someone else does</h2>
+    <div class="scarce">
+      <b>Five firms in Pinellas County. One per charge type.</b>
+      <span>DUI goes to one firm, drug possession to another, domestic violence
+      to a third. It is enforced in the software, not promised in a brochure:
+      one arrest produces one letter across every firm we work with. Nothing is
+      taken yet — the first firm to ask for a charge type gets it.</span>
+    </div>
+    <div class="claimrow">
+      <a class="claim" href="mailto:craig@firstappearance.us?subject=Claiming%20a%20Pinellas%20charge%20type&body=Firm%3A%0ABar%20number%3A%0ACharges%20I%20want%3A%0A%0A(DUI%2C%20drug%20possession%2C%20domestic%20violence%20%E2%80%94%20whichever%20is%20still%20open.)%0A">Claim your charge type</a>
+      <span class="left">Opens an email. Still no form, still nothing
+      collected.</span>
+    </div>
     <p>
       Fourteen days on the real Pinellas roster, writing the real letters for your
       firm. <strong>No credit card, nothing to install, and nothing gets mailed.</strong>
