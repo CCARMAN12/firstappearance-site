@@ -99,6 +99,17 @@
   /* --- the board ------------------------------------------------------ */
   .board { border:1px solid var(--rule); background:var(--paper);
            border-radius:5px; overflow:hidden; margin:.4rem 0 1.4rem; }
+  .priceline { display:flex; gap:.4rem 1.6rem; flex-wrap:wrap; align-items:baseline;
+               border:1px solid var(--rule); background:var(--paper);
+               border-radius:5px; padding:1rem 1.1rem; margin:.4rem 0 1.2rem; }
+  .priceline .amt { font-family:"Newsreader",Georgia,serif; font-size:2.3rem;
+                    font-weight:500; margin:0; line-height:1; white-space:nowrap; }
+  .priceline .amt span { display:block; font-family:"IBM Plex Sans",system-ui,sans-serif;
+                         font-size:.68rem; text-transform:uppercase;
+                         letter-spacing:.09em; color:var(--muted);
+                         margin-top:.35rem; font-weight:600; }
+  .priceline .plus { margin:0; flex:1 1 20rem; font-size:.9rem; color:var(--ink-soft); }
+
   .slot { display:grid; grid-template-columns:1fr auto;
           gap:.25rem 1rem; align-items:baseline;
           padding:.9rem 1.1rem; border-bottom:1px solid var(--rule-soft); }
@@ -165,40 +176,42 @@
   promising it.
 </p>
 
+<div class="priceline">
+  <p class="amt">$149<span>per month, per slot</span></p>
+  <p class="plus">Plus postage at what it actually costs us, billed at the end of
+  each month &mdash; or nothing at all if you print and post the letters
+  yourself. Every piece is itemised on your own page as it accrues, so the
+  invoice is never the first time you see the number.</p>
+</div>
+
 <div class="board">
   <div class="slot">
     <p class="nm">DUI</p>
-    <p class="px">$9,600<small>per year</small></p>
     <p class="vol">3,326 arrests a year — about 3,060 with a mailable address</p>
     <span class="st open">Open</span>
   </div>
   <div class="slot">
     <p class="nm">Drug possession</p>
-    <p class="px">$6,000<small>per year</small></p>
     <p class="vol">about 2,208 mailable a year</p>
     <span class="st open">Open</span>
   </div>
   <div class="slot">
     <p class="nm">Domestic violence</p>
-    <p class="px">$5,000<small>per year</small></p>
     <p class="vol">about 1,380 mailable a year</p>
     <span class="st open">Open</span>
   </div>
   <div class="slot">
     <p class="nm">Theft and property</p>
-    <p class="px">$4,500<small>per year</small></p>
     <p class="vol">about 2,024 mailable a year</p>
     <span class="st open">Open</span>
   </div>
   <div class="slot">
     <p class="nm">Assault and battery</p>
-    <p class="px">$4,300<small>per year</small></p>
     <p class="vol">about 1,196 mailable a year</p>
     <span class="st open">Open</span>
   </div>
   <div class="slot">
     <p class="nm">Traffic and licence</p>
-    <p class="px">$2,200<small>per year</small></p>
     <p class="vol">about 1,656 mailable a year</p>
     <span class="st open">Open</span>
   </div>
@@ -208,15 +221,19 @@
 
 <h2>Terms</h2>
 <ul class="terms">
-  <li><b>Annual, prepaid</b><span>One invoice at the start of the term. No card
-    on file and no monthly decision to re-make.</span></li>
+  <li><b>$149 a month</b><span>The same for every slot. No tiers, no letter cap,
+    nothing to negotiate — a busy week on the roster costs you nothing
+    extra.</span></li>
+  <li><b>Postage at cost</b><span>Billed at the end of the month at what the
+    vendor actually charged, itemised on your own page as it accrues. Nothing
+    at all if you print and post them yourself.</span></li>
   <li><b>Exclusive</b><span>For as long as you hold it, no other firm in Pinellas
     receives our letters on that charge.</span></li>
-  <li><b>Auto-renews</b><span>On 60 days' notice either way. A lapsed slot returns
-    to this board the day it lapses.</span></li>
-  <li><b>Postage at cost</b><span>Or nothing at all if you print and post them
-    yourself — which is also what satisfies Florida's requirement that
-    &ldquo;ADVERTISEMENT&rdquo; appear on the envelope face.</span></li>
+  <li><b>Monthly</b><span>Cancel on 30 days' notice. A released slot returns to
+    this board the day it goes.</span></li>
+  <li><b>Your own envelopes</b><span>Printing them yourself is also what
+    satisfies Florida's requirement that &ldquo;ADVERTISEMENT&rdquo; appear on
+    the envelope face.</span></li>
   <li><b>Never per letter</b><span>A letter we hold back earns us nothing. That is
     deliberate: a company paid by the letter has a reason to send one.</span></li>
   <li><b>First to ask</b><span>No queue, no ranking, no favoured buyer. This board
@@ -259,10 +276,9 @@
   Arrest volumes are from the Florida Department of Law Enforcement's Uniform
   Crime Report for 2024. The mailable share is the proportion of Pinellas booking
   records carrying a usable mailing address, counted directly off the roster.
-  Prices are set from what a slot produces for the firm holding it, assuming a
-  1.5% response to a compliant letter — the middle of the published range for
-  this kind of mail, and not yet our own measured figure. We will replace it with
-  a real one when a subscriber has given us one.
+  The price is the same for every slot and is not derived from these volumes —
+  a DUI slot produces more than a traffic slot, and costs the same. That is
+  deliberate: one price is a straight answer, and a tier list is a negotiation.
 </p>
 <p class="cite">
   No arrested person is named here or on any page we publish. An arrest is a
