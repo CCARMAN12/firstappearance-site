@@ -184,6 +184,10 @@
   .plist li { display:flex; gap:.9rem; align-items:baseline;
               border-bottom:1px solid var(--rule-soft); padding-bottom:.7rem; }
   .plist li:last-child { border-bottom:0; padding-bottom:0; }
+  .onlyprice { display:flex; align-items:baseline; gap:.5rem 1.4rem;
+                flex-wrap:wrap; margin:0 0 1.2rem; }
+  .onlyprice .tamt { font-size:2.4rem; }
+  .onlyprice p { margin:0; flex:1 1 20rem; color:var(--muted); font-size:.95rem; }
   .pamt { font-weight:600; font-variant-numeric:tabular-nums; min-width:9.5rem;
           font-size:1.02rem; }
   .pwhat { color:var(--ink-soft); font-size:.93rem; }
@@ -394,26 +398,11 @@
   <section class="price">
     <h2>What it costs</h2>
 
-    <div class="tiers">
-      <div class="tier">
-        <div class="tname">Solo</div>
-        <div class="tamt">$149<span>/month</span></div>
-        <div class="tinc">up to 100 letters</div>
-        <p>One charge type. A DUI-only practice in Pinellas sits here.</p>
-      </div>
-      <div class="tier">
-        <div class="tname">Practice</div>
-        <div class="tamt">$299<span>/month</span></div>
-        <div class="tinc">up to 350 letters</div>
-        <p>Two or three charge types, or a wider filter on one.</p>
-      </div>
-      <div class="tier">
-        <div class="tname">County</div>
-        <div class="tamt">$549<span>/month</span></div>
-        <div class="tinc">no cap, one county</div>
-        <p>Every matching booking in the county, however many that turns out
-        to be.</p>
-      </div>
+    <div class="onlyprice">
+      <div class="tamt">$149<span>/month</span></div>
+      <p>One price for every charge type. No tiers, no letter cap — a busy week
+      on the roster costs you nothing extra. See
+      <a href="/slots.html">which slots are open</a>.</p>
     </div>
 
     <ul class="plist">
@@ -424,6 +413,8 @@
       <li><span class="pamt">Postage at cost</span>
           <span class="pwhat">Passed through at exactly what the mail vendor
           charges, itemised, never marked up — roughly a dollar a letter.
+          Billed at the end of the month, and visible to you on your own page
+          as it accrues rather than appearing for the first time on an invoice.
           <b>Print them on your own printer and you pay us no postage at
           all.</b></span></li>
       <li><span class="pamt">$150 once</span>
@@ -439,12 +430,6 @@
     <p class="pbill">
       <strong>No card, now or later.</strong> Sign up, use it, and we invoice
       you monthly — net 30, like every other vendor you work with.
-    </p>
-    <p class="pfoot">
-      We do not charge per letter. A letter we hold back — a minor, no usable
-      address, a jurisdiction you have not confirmed — costs you nothing and
-      earns us nothing. That is deliberate: a company paid by the letter has a
-      reason to send one, and we would rather not have that reason.
     </p>
   </section>
 
