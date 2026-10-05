@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Six exclusive charge-type slots in Pinellas County, with prices, volumes and which are still open. Scarcity you can check.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#1F4E5F">
+<title>Slots — First Appearance</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<style>
+  :root {
+    --ground:#F7F8F9; --paper:#FFFFFF; --ink:#131B26; --ink-soft:#33404F;
+    --muted:#5A6474; --faint:#8A93A1; --rule:#DEE2E8; --rule-soft:#EDF0F3;
+    --action:#1F4E5F; --stop:#8C2F39; --stop-soft:#F7ECEE;
+    --warn:#8A5A1F; --warn-soft:#FBF3E6; --go:#1F5F3A; --go-soft:#EDF5F0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#0E141B; --paper:#151D26; --ink:#E7EBF0; --ink-soft:#C4CCD6;
+      --muted:#98A2B0; --faint:#6E7887; --rule:#28323D; --rule-soft:#1E2731;
+      --action:#7FB3C4; --stop:#E09AA4; --stop-soft:#2E1E21;
+      --warn:#D6A968; --warn-soft:#2A2317; --go:#8FC7A6; --go-soft:#17241C;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#0E141B; --paper:#151D26; --ink:#E7EBF0; --ink-soft:#C4CCD6;
+    --muted:#98A2B0; --faint:#6E7887; --rule:#28323D; --rule-soft:#1E2731;
+    --action:#7FB3C4; --stop:#E09AA4; --stop-soft:#2E1E21;
+    --warn:#D6A968; --warn-soft:#2A2317; --go:#8FC7A6; --go-soft:#17241C;
+  }
+  *,*::before,*::after { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink);
+         font-family:"IBM Plex Sans",system-ui,sans-serif; font-size:15px;
+         line-height:1.6; -webkit-font-smoothing:antialiased; }
+
+  .mast { display:flex; align-items:center; gap:.6rem; background:var(--paper);
+          border-bottom:1px solid var(--rule); padding:.6rem 1.1rem; }
+  .mast svg { color:var(--action); width:22px; height:22px; flex:none; display:block; }
+  .mast .name { font-family:"Newsreader",Georgia,serif; font-size:1.05rem;
+                font-weight:500; color:var(--ink); text-decoration:none; }
+  .mast .what { font-size:.78rem; color:var(--faint); padding-left:.55rem;
+                border-left:1px solid var(--rule); }
+  .mast .links { margin-left:auto; display:flex; gap:1rem; font-size:.85rem; }
+  .mast .links a { color:var(--muted); text-decoration:none; }
+  .mast .links a.on { color:var(--action); font-weight:600; }
+  .mast .links a:hover { color:var(--ink); }
+
+  .wrap { max-width:46rem; margin:0 auto; padding:2rem 1.1rem 4rem; }
+  h1 { font-family:"Newsreader",Georgia,serif; font-size:1.7rem; font-weight:500;
+       margin:0 0 .3rem; letter-spacing:-.01em; }
+  .lede { color:var(--muted); margin:0 0 1.6rem; font-size:1rem; max-width:60ch; }
+  h2 { font-family:"Newsreader",Georgia,serif; font-size:1.2rem; font-weight:500;
+       margin:2.2rem 0 .6rem; padding-top:1.2rem; border-top:1px solid var(--rule); }
+  h3 { font-size:.72rem; text-transform:uppercase; letter-spacing:.09em;
+       color:var(--faint); font-weight:600; margin:1.4rem 0 .35rem; }
+  p { margin:0 0 .85rem; max-width:66ch; }
+  .cite { font-size:.85rem; color:var(--muted); }
+  code { font-family:ui-monospace,SFMono-Regular,monospace; font-size:.88em;
+         background:var(--rule-soft); padding:.1em .35em; border-radius:3px; }
+
+  .note { padding:.85rem 1rem; border-radius:4px; font-size:.92rem; margin:1.1rem 0;
+          max-width:66ch; }
+  .note.warn { background:var(--warn-soft); color:var(--warn); border-left:3px solid var(--warn); }
+  .note.stop { background:var(--stop-soft); color:var(--stop); border-left:3px solid var(--stop); }
+  .note.ok   { background:var(--go-soft);   color:var(--go);   border-left:3px solid var(--go); }
+
+  table { width:100%; border-collapse:collapse; margin:.8rem 0 1.2rem;
+          background:var(--paper); border:1px solid var(--rule); border-radius:4px; }
+  th { text-align:left; font-size:.68rem; text-transform:uppercase; letter-spacing:.08em;
+       color:var(--faint); font-weight:600; padding:.6rem .8rem;
+       border-bottom:1px solid var(--rule); }
+  td { padding:.6rem .8rem; border-bottom:1px solid var(--rule-soft);
+       font-size:.92rem; vertical-align:top; }
+  tr:last-child td { border-bottom:0; }
+
+  ol.q { counter-reset:q; list-style:none; padding:0; margin:.6rem 0 0; }
+  ol.q li { counter-increment:q; position:relative; padding-left:2.2rem;
+            margin-bottom:.9rem; max-width:66ch; }
+  ol.q li::before { content:counter(q); position:absolute; left:0; top:.05rem;
+            width:1.5rem; height:1.5rem; border-radius:50%; background:var(--rule-soft);
+            color:var(--muted); font-size:.78rem; font-weight:600;
+            display:flex; align-items:center; justify-content:center; }
+  ol.q b { display:block; font-weight:600; }
+
+  .frame { background:var(--paper); border:1px solid var(--rule);
+           border-left:3px solid var(--action); border-radius:4px;
+           padding:.9rem 1.05rem; margin:0 0 1.6rem; max-width:66ch;
+           font-size:.95rem; }
+  a.fn { font-size:.7em; vertical-align:super; text-decoration:none;
+         color:var(--action); font-weight:600; margin-left:.15em; }
+  .fnote { font-size:.86rem; color:var(--muted); max-width:66ch; }
+  footer { border-top:1px solid var(--rule); margin-top:2.5rem; padding-top:1rem;
+           color:var(--faint); font-size:.82rem; }
+  footer a { color:var(--muted); }
+  @media (max-width:640px) { .mast .what { display:none; } .mast .links { gap:.7rem; font-size:.8rem; } }
+
+  /* --- the board ------------------------------------------------------ */
+  .board { border:1px solid var(--rule); background:var(--paper);
+           border-radius:5px; overflow:hidden; margin:.4rem 0 1.4rem; }
+  .slot { display:grid; grid-template-columns:1fr auto;
+          gap:.25rem 1rem; align-items:baseline;
+          padding:.9rem 1.1rem; border-bottom:1px solid var(--rule-soft); }
+  .slot:last-child { border-bottom:0; }
+  .slot .nm { font-family:"Newsreader",Georgia,serif; font-size:1.18rem;
+              font-weight:500; margin:0; }
+  .slot .px { font-size:1.18rem; font-weight:600; text-align:right;
+              white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .slot .px small { display:block; font-size:.66rem; font-weight:400;
+                    letter-spacing:.08em; text-transform:uppercase;
+                    color:var(--faint); }
+  .slot .vol { grid-column:1; margin:0; font-size:.84rem; color:var(--muted); }
+  .slot .st { grid-column:2; justify-self:end; font-size:.63rem; font-weight:600;
+              text-transform:uppercase; letter-spacing:.11em; white-space:nowrap;
+              padding:.18rem .5rem; border-radius:2px; border:1px solid currentColor; }
+  .st.open { color:var(--go); background:var(--go-soft); }
+  .st.taken { color:var(--stop); background:var(--stop-soft); }
+
+  .terms { list-style:none; margin:0 0 1rem; padding:0; }
+  .terms li { display:flex; gap:.8rem; align-items:baseline; padding:.45rem 0;
+              border-bottom:1px solid var(--rule-soft); }
+  .terms li:last-child { border-bottom:0; }
+  .terms b { flex:none; min-width:9rem; }
+  @media (max-width:520px) {
+    .terms li { flex-direction:column; gap:.1rem; }
+    .terms b { min-width:0; }
+    .slot { grid-template-columns:1fr; }
+    .slot .px, .slot .st { grid-column:1; justify-self:start; text-align:left; }
+  }
+
+  .proof { border-left:3px solid var(--action); background:var(--paper);
+           padding:.9rem 1.1rem; margin:1.2rem 0; }
+  .proof p { margin:0; color:var(--ink-soft); }
+  footer { margin-top:2.6rem; padding-top:1.1rem; border-top:1px solid var(--rule);
+           font-size:.8rem; color:var(--faint); }
+  footer a { color:var(--action); }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <rect x="7.5" y="11" width="17" height="11.5" rx="1" fill="none"
+          stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+    <path d="M9 12.2 16 17.6l7-5.4" fill="none" stroke="currentColor"
+          stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <a class="name" href="/">First Appearance</a>
+  <span class="what">Compliant letters to the newly arrested</span>
+  <span class="links">
+    <a href="/">Demo</a>
+    <a href="/slots.html" class="on">Slots</a>
+    <a href="/compliance.html">Compliance</a>
+  </span>
+</header>
+
+<div class="wrap">
+
+<h1>Six firms in Pinellas. One per charge type.</h1>
+<p class="lede">
+  Every weekday morning we read the county jail roster, filter it to the charges
+  one firm takes, and draft the letters that firm sends. A charge type goes to
+  exactly one firm — and the software enforces it, rather than the brochure
+  promising it.
+</p>
+
+<div class="board">
+  <div class="slot">
+    <p class="nm">DUI</p>
+    <p class="px">$9,600<small>per year</small></p>
+    <p class="vol">3,326 arrests a year — about 3,060 with a mailable address</p>
+    <span class="st open">Open</span>
+  </div>
+  <div class="slot">
+    <p class="nm">Drug possession</p>
+    <p class="px">$6,000<small>per year</small></p>
+    <p class="vol">about 2,208 mailable a year</p>
+    <span class="st open">Open</span>
+  </div>
+  <div class="slot">
+    <p class="nm">Domestic violence</p>
+    <p class="px">$5,000<small>per year</small></p>
+    <p class="vol">about 1,380 mailable a year</p>
+    <span class="st open">Open</span>
+  </div>
+  <div class="slot">
+    <p class="nm">Theft and property</p>
+    <p class="px">$4,500<small>per year</small></p>
+    <p class="vol">about 2,024 mailable a year</p>
+    <span class="st open">Open</span>
+  </div>
+  <div class="slot">
+    <p class="nm">Assault and battery</p>
+    <p class="px">$4,300<small>per year</small></p>
+    <p class="vol">about 1,196 mailable a year</p>
+    <span class="st open">Open</span>
+  </div>
+  <div class="slot">
+    <p class="nm">Traffic and licence</p>
+    <p class="px">$2,200<small>per year</small></p>
+    <p class="vol">about 1,656 mailable a year</p>
+    <span class="st open">Open</span>
+  </div>
+</div>
+
+<p class="cite">Six open, none taken. As at 4 October 2026.</p>
+
+<h2>Terms</h2>
+<ul class="terms">
+  <li><b>Annual, prepaid</b><span>One invoice at the start of the term. No card
+    on file and no monthly decision to re-make.</span></li>
+  <li><b>Exclusive</b><span>For as long as you hold it, no other firm in Pinellas
+    receives our letters on that charge.</span></li>
+  <li><b>Auto-renews</b><span>On 60 days' notice either way. A lapsed slot returns
+    to this board the day it lapses.</span></li>
+  <li><b>Postage at cost</b><span>Or nothing at all if you print and post them
+    yourself — which is also what satisfies Florida's requirement that
+    &ldquo;ADVERTISEMENT&rdquo; appear on the envelope face.</span></li>
+  <li><b>Never per letter</b><span>A letter we hold back earns us nothing. That is
+    deliberate: a company paid by the letter has a reason to send one.</span></li>
+  <li><b>First to ask</b><span>No queue, no ranking, no favoured buyer. This board
+    is the whole allocation.</span></li>
+</ul>
+
+<h2>Why six and not sixty</h2>
+<p>
+  Because what is being sold is the absence of competitors. A seventh DUI
+  subscriber would be buying letters that do not exist — the roster produces what
+  it produces, and splitting it is the one thing that would make it worthless.
+</p>
+<p>
+  One arrest produces one letter across every firm we work with. Which firm gets
+  it is decided by the lead charge on the booking, before anything is printed, so
+  no arrested person ever receives two letters from us.
+</p>
+
+<div class="proof">
+  <p><strong>This board is the proof.</strong> Scarcity nobody can check is just a
+  sentence in a sales letter. This is the same page everyone sees, it changes when
+  a slot goes, and a slot sitting open here for months is evidence we are not
+  inventing demand.</p>
+</div>
+
+<h2>Taking one</h2>
+<p>
+  Tell us the firm, your Florida Bar number and which charge type. There is no
+  form on this page and nothing is collected until you decide. The working
+  software is on the <a href="/">demo</a> — no sign-up, running yesterday's real
+  roster, including the letters it refused to write and why.
+</p>
+<p class="cite">
+  <a href="mailto:craig@firstappearance.us?subject=Claiming%20a%20Pinellas%20charge%20type">craig@firstappearance.us</a>
+  &nbsp;·&nbsp; <a href="tel:+17272651094">727-265-1094</a>
+</p>
+
+<h2>How the figures were measured</h2>
+<p class="cite">
+  Arrest volumes are from the Florida Department of Law Enforcement's Uniform
+  Crime Report for 2024. The mailable share is the proportion of Pinellas booking
+  records carrying a usable mailing address, counted directly off the roster.
+  Prices are set from what a slot produces for the firm holding it, assuming a
+  1.5% response to a compliant letter — the middle of the published range for
+  this kind of mail, and not yet our own measured figure. We will replace it with
+  a real one when a subscriber has given us one.
+</p>
+<p class="cite">
+  No arrested person is named here or on any page we publish. An arrest is a
+  public record, which is not the same as something that should be republished
+  with a name on it.
+</p>
+
+<footer>
+  First Appearance · P.O. Box 5806, Spring Hill, FL 34611 · 727-265-1094 ·
+  <a href="mailto:craig@firstappearance.us">craig@firstappearance.us</a><br>
+  Board last updated 4 October 2026.
+</footer>
+
+</div>
+</body>
+</html>
